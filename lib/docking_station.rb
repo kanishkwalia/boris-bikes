@@ -16,7 +16,12 @@ class DockingStation
   end
 
   def dock(bike)
+    raise "You can only dock a bike" unless bike.respond_to? :working?
     @bikes << bike
+  end
+
+  def available_bikes
+    @bikes.select{|bike| bike.working? }
   end
 
 end
