@@ -3,6 +3,8 @@ require 'docking_station'
 describe DockingStation do
   
   let(:old_street) { DockingStation.new }
+  let(:bike) { double(:bike, {working?: true})}
+  let(:broken_bike) {double(:broken_bike, {working?: false})}
 
   it "has a default capacity" do
 	  expect(old_street.capacity).to eq 20
@@ -18,8 +20,18 @@ describe DockingStation do
   end
 
   it "can accept bikes" do
-    bike = "Bike"
     old_street.dock(bike)
     expect(old_street).to have_bikes
   end
+
+  it "raises an error when you're not docking a bike" do
+    bike = "Bike"
+    expect{ old_street.dock(bike) }.to raise_error "You can only dock a bike"
+  end
+
+  it "knows it has working bikes" do
+    old_street.dock(broken_bike)
+    old_street.dock(bike)
+    expect(old_street.available_bikes).to eq [bike]
+  end 
 end
