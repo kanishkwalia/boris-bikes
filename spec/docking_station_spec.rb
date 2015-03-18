@@ -3,8 +3,8 @@ require 'docking_station'
 describe DockingStation do
   
   let(:old_street) { DockingStation.new }
-  let(:bike) { double(:bike, {working?: true})}
-  let(:broken_bike) {double(:broken_bike, {working?: false})}
+  let(:bike) { double(:bike, {working?: true}) }
+  let(:broken_bike) { double(:broken_bike, {working?: false}) }
 
   it "has a default capacity" do
 	  expect(old_street.capacity).to eq 20
